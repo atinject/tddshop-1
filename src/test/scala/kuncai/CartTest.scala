@@ -59,4 +59,9 @@ class CartTest extends FlatSpec with Matchers {
     cartService.checkOut should be(1.10)
   }
 
+  "A checkout system" should "calculate BuyOneGetOneFree offer for 2 Apples" in {
+    val cartService = new CartService(List("ORANGE", "APPLE", "APPLE"))
+    cartService.checkOut should be(0.85)
+  }
+
 }
