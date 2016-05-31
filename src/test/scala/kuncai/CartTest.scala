@@ -41,7 +41,7 @@ class CartTest extends FlatSpec with Matchers {
 
   "A checkout system" should "calculate the basket total" in {
     val cartService = new CartService(List("APPLE", "APPLE", "APPLE","ORANGE"))
-    cartService.checkOut should be(2.05)
+    cartService.checkOut should be(1.45)
   }
 
   "A checkout system" must "calculate the total price of saved items in basket Apple only" in {

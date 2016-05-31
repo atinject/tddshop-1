@@ -1,5 +1,6 @@
 package kuncai
 
+import scala.math.BigDecimal.RoundingMode
 
 /**
   * Created by kcai on 31/05/2016.
@@ -13,16 +14,16 @@ class OfferService {
       case _ => new BuyForPriceOfOffer(1, 1)
     }
 
-    0
+    (offer.getQuantity(quantity) * price).setScale(2, RoundingMode.HALF_EVEN).toDouble
   }
 }
 
 sealed trait Offerable {
-
+  val stackable = false // assume not stackable
   val offerQuantity: Int
   val forPriceQuantity: Int
 }
 
 class BuyForPriceOfOffer(val offerQuantity: Int, val forPriceQuantity: Int) extends Offerable {
-  def getQuantity(quantity: Int) = 0
+  def getQuantity(quantity: Int) = (quantity % offerQuantity) + (quantity / offerQuantity * forPriceQuantity)
 }
